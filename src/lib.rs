@@ -31,7 +31,10 @@ mod macos;
 use macos as platform;
 
 use std::env;
+#[cfg(not(target_env = "sgx"))]
 use std::fs::File;
+#[cfg(target_env = "sgx")]
+use std::untrusted::fs::File;
 use std::io::BufReader;
 use std::io::{Error, ErrorKind};
 use std::path::{Path, PathBuf};
