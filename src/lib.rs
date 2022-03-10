@@ -10,9 +10,14 @@
 //!   that lets callers pass their own certificate parsing logic. It is
 //!   available to all users.
 
-#[cfg(all(unix, not(target_os = "macos")))]
+#[cfg(target_env = "sgx")]
 mod unix;
-#[cfg(all(unix, not(target_os = "macos")))]
+#[cfg(target_env = "sgx")]
+use unix as platform;
+
+#[cfg(all(unix, not(target_os = "macos"), not(target_env = "sgx")))]
+mod unix;
+#[cfg(all(unix, not(target_os = "macos"), not(target_env = "sgx")))]
 use unix as platform;
 
 #[cfg(windows)]

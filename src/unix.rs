@@ -1,5 +1,6 @@
 use crate::load_pem_certs;
 use crate::Certificate;
+extern crate openssl_probe;
 
 use std::io::Error;
 
